@@ -54,3 +54,6 @@ gem "devise-jwt"
 gem "active_model_serializers", "~> 0.10.0"
 
 gem "u-case", "~> 4.5.1"
+
+gem "public_suffix"
+gem "httparty"

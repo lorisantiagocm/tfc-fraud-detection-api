@@ -11,7 +11,7 @@ class WhoisInformation::Analyze::ThirdLevelDomain < Micro::Case
     found_suspect_terms = []
 
     SUSPECT_TERMS.each do |term|
-      found_suspect_terms << third_level_domain.include?(term)
+      found_suspect_terms << term if third_level_domain.include?(term)
     end
 
     Success result: { third_level_domain_suspected_terms: found_suspect_terms }

@@ -3,8 +3,9 @@ class CreateDomainLookup < ActiveRecord::Migration[8.0]
     create_table :domain_lookups do |t|
       t.references :domain, null: false, foreign_key: true
       t.references :whois_information, null: false, foreign_key: true
-      t.jsonb :warnings, default: []
+      t.string :warnings, default: [], array: true
       t.string :ip
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

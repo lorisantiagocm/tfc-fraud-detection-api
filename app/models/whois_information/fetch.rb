@@ -10,7 +10,7 @@ class WhoisInformation::Fetch < Micro::Case
     if whois_information.nil?
       response = HTTParty.get("https://api.whoxy.com/?key=e0af321ba6d4965eoaea9d9d9ac2344b9&whois=#{domain_name}")
 
-      if response.body.nil? || !response.ok?
+      if response.body.nil? || !response.ok? || response.parsed_response["status"] == 0
         return Success result: { whois_information: nil }
       end
 
