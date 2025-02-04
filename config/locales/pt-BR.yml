@@ -1,0 +1,11 @@
+pt-BR:
+  errors:
+    messages:
+      uncommon_top_level_domain: "O domínio de nível superior (TLD) '%{data}' é incomum."
+      check_country_code: "O TLD '%{data}' é característico de um país, verifique se o site pertence a uma empresa deste país ou se está na mesma língua."
+      recently_created_domain: "O domínio foi criado recentemente, em %{data}. Verifique se o site é legítimo."
+      recently_created_domain: "O domínio foi atualizado recentemente, em %{data}. Verifique se o site é legítimo."
+      suspect_domain_term: "Termos suspeitos encontrados: %{data}. Verifique se o site não está se passando por uma empresa real."
+  time:
+    formats:
+      general_dates: "%d/%m/%Y"

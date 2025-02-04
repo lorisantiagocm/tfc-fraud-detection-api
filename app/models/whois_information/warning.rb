@@ -7,6 +7,12 @@ class WhoisInformation::Warning
   end
 
   def to_string
-    I18n.t("errors.messages.#{@type}", data: @data)
+    formatted_data = if @data.is_a?(DateTime) || @data.is_a?(Time) || @data.is_a?(Date) || @data.is_a?(ActiveSupport::TimeWithZone)
+                      I18n.l(@data, format: :general_dates)
+    else
+                      @data
+    end
+
+    I18n.t("errors.messages.#{@type}", data: formatted_data)
   end
 end
