@@ -1,3 +1,3 @@
 class DomainLookupSerializer < ActiveModel::Serializer
-  attributes :id, :domain, :whois_information
+  attributes :id, :warnings, :domain, :whois_information
 end

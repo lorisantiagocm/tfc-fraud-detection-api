@@ -1,12 +1,13 @@
 class WhoisInformation::Analyze::Save < Micro::Case
-  attributes :domain, :whois_information, :warnings, :ip
+  attributes :domain, :whois_information, :warnings, :ip, :user
 
   def call!
     lookup = DomainLookup.create(
       ip: ip,
       domain: domain,
       whois_information: whois_information,
-      warnings: warnings.map { |w| { type: w.type, data: w.data } }
+      warnings: warnings.map { |w| { type: w.type, data: w.data, localized_message: w.to_string } },
+      user: user
     )
 
     if lookup.errors.any?

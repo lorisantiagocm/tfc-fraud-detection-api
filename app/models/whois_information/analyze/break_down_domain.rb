@@ -18,7 +18,8 @@ class WhoisInformation::Analyze::BreakDownDomain < Micro::Case
       protocol: protocol&.downcase,
       top_level_domain: parsed_domain.tld&.downcase,
       third_level_domain: parsed_domain.trd&.downcase,
-      port: uri.port
+      port: uri.port,
+      whois_formatted_domain: [ parsed_domain.sld, parsed_domain.tld ].join(".")
     }
   end
 end

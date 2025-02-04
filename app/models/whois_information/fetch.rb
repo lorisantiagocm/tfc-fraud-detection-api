@@ -1,5 +1,5 @@
 class WhoisInformation::Fetch < Micro::Case
-  attributes :domain_name
+  attributes :domain_name, :whois_formatted_domain
 
   def call!
     domain = Domain.create_or_find_by(name: domain_name)
@@ -8,10 +8,10 @@ class WhoisInformation::Fetch < Micro::Case
     whois_information = WhoisInformation.where(domain: domain.id).where("created_at < ?", Time.current - 2.days).first
 
     if whois_information.nil?
-      response = HTTParty.get("https://api.whoxy.com/?key=e0af321ba6d4965eoaea9d9d9ac2344b9&whois=#{domain_name}")
+      response = HTTParty.get("https://api.whoxy.com/?key=e0af321ba6d4965eoaea9d9d9ac2344b9&whois=#{whois_formatted_domain}")
 
       if response.body.nil? || !response.ok? || response.parsed_response["status"] == 0
-        return Success result: { whois_information: nil }
+        return Success result: { whois_information: nil, domain: domain }
       end
 
       whois_information = WhoisInformation.create(
