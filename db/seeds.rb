@@ -8,7 +8,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.create(
-  email: 'teste@teste.com',
-  password: 'qwe123!'
-)
+# User.create(
+#   email: 'teste@teste.com',
+#   password: 'qwe123!'
+# )
+
+trusted_domains = %w[https://www.correios.com.br https://www.google.com https://shopee.com.br https://www.temu.com]
+
+trusted_domains.each do |domain|
+  result = WhoisInformation::Analyze::BreakDownDomain.call(searched_url: domain)
+
+  Domain.create(
+    name: result[:domain_name],
+    trusted: true
+  )
+end
